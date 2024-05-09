@@ -12,4 +12,6 @@ public class RoleModel {
     @Enumerated(EnumType.STRING)
     @Column(name = "name")
     private RoleType roleName;
+
+
 }
