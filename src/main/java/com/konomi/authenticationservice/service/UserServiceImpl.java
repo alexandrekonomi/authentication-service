@@ -2,14 +2,15 @@ package com.konomi.authenticationservice.service;
 
 import com.konomi.authenticationservice.dto.UserDto;
 import com.konomi.authenticationservice.enums.RoleType;
+import com.konomi.authenticationservice.exception.BadRequestException;
+import com.konomi.authenticationservice.exception.ConflictException;
+import com.konomi.authenticationservice.exception.ResourceNotFoundException;
 import com.konomi.authenticationservice.model.RoleModel;
 import com.konomi.authenticationservice.model.UserModel;
 import com.konomi.authenticationservice.repository.RoleRepository;
 import com.konomi.authenticationservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,6 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
-    @SneakyThrows //adicionar um global exp handler e remover essa anotation
     @Override
     public ResponseEntity<?> signUpUser(UserDto userDto) {
 
@@ -36,19 +36,19 @@ public class UserServiceImpl implements UserService {
         String email = userDto.getEmail();
         if (userRepository.existsByEmail(email)) {
             log.warn("Email {} is already registered", email);
-            throw new BadRequestException("Email is already registered"); //TODO criar uma exp especifica
+            throw new ConflictException("Email is already registered");
         }
 
         String document = userDto.getDocument();
         if (userRepository.existsByDocument(document)) {
             log.warn("Document {} is already registered", document);
-            throw new BadRequestException("Document is already registered"); //TODO criar uma exp especifica
+            throw new ConflictException("Document is already registered");
         }
 
         RoleType roleType = RoleType.valueOf(userDto.getRoleName());
 
         RoleModel role = roleRepository.findByRoleName(roleType)
-                .orElseThrow(() -> new BadRequestException("Erro")); //TODO criar uma exp especifica
+                .orElseThrow(() -> new ResourceNotFoundException("roel", "roleName", userDto.getRoleName()));
 
         UserModel user = new UserModel();
         user.setName(userDto.getName());
