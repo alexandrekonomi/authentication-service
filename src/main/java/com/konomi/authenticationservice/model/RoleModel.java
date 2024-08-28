@@ -10,7 +10,7 @@ public class RoleModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Enumerated(EnumType.STRING)
-    @Column(name = "name")
+    @Column(name = "role_name")
     private RoleType roleName;
 
 

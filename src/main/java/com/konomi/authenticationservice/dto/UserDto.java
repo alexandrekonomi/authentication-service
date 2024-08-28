@@ -20,21 +20,23 @@ public class UserDto {
         interface SignupAdmin {
         }
 
+        public class UserPut {
+        }
     }
 
     @NotEmpty(groups = {UserDto.UserView.SignupUser.class, UserDto.UserView.SignupAdmin.class})
     @NotNull(groups = {UserDto.UserView.SignupUser.class, UserDto.UserView.SignupAdmin.class})
-    @JsonView({UserDto.UserView.SignupUser.class, UserDto.UserView.SignupAdmin.class})
+    @JsonView({UserDto.UserView.SignupUser.class, UserDto.UserView.SignupAdmin.class, UserDto.UserView.UserPut.class})
     private String name;
     @NotEmpty(groups = {UserDto.UserView.SignupUser.class, UserDto.UserView.SignupAdmin.class})
     @NotNull(groups = {UserDto.UserView.SignupUser.class, UserDto.UserView.SignupAdmin.class})
-    @Size(min = 11, max = 14, groups = {UserDto.UserView.SignupUser.class, UserDto.UserView.SignupAdmin.class})
+    @Size(min = 11, max = 14, groups = {UserDto.UserView.SignupUser.class, UserDto.UserView.SignupAdmin.class, UserDto.UserView.UserPut.class})
     @JsonView({UserDto.UserView.SignupUser.class, UserDto.UserView.SignupAdmin.class})
     private String document;
     @NotEmpty(groups = {UserDto.UserView.SignupUser.class, UserDto.UserView.SignupAdmin.class})
     @NotNull(groups = {UserDto.UserView.SignupUser.class, UserDto.UserView.SignupAdmin.class})
-    @Email(groups = {UserDto.UserView.SignupUser.class, UserDto.UserView.SignupAdmin.class})
-    @JsonView({UserDto.UserView.SignupUser.class, UserDto.UserView.SignupAdmin.class})
+    @Email(groups = {UserDto.UserView.SignupUser.class, UserDto.UserView.SignupAdmin.class, UserDto.UserView.UserPut.class})
+    @JsonView({UserDto.UserView.SignupUser.class, UserDto.UserView.SignupAdmin.class, UserDto.UserView.UserPut.class})
     private String email;
     @NotEmpty(groups = {UserDto.UserView.SignupUser.class, UserDto.UserView.SignupAdmin.class})
     @NotNull(groups = {UserDto.UserView.SignupUser.class, UserDto.UserView.SignupAdmin.class})

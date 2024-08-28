@@ -3,4 +3,8 @@ spring:
       url: jdbc:postgresql://localhost:5432/authService
       username: postgres
       password: root
-
+jpa:
+  hibernate:
+    ddl-auto: none
+    show-sql: true
+    dialect: org.hibernate.dialect.PostgreSQL82Dialect
