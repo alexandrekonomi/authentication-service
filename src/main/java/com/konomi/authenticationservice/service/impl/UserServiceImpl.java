@@ -107,12 +107,12 @@ public class UserServiceImpl implements UserService {
 
         String document = StringUtils.stripToNull(userDto.getDocument());
         if (Objects.nonNull(document)) {
-            userModel.setName(document);
+            userModel.setDocument(document);
         }
 
         String email = StringUtils.stripToNull(userDto.getEmail());
         if (Objects.nonNull(email)) {
-            userModel.setName(email);
+            userModel.setEmail(email);
         }
 
         userModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
