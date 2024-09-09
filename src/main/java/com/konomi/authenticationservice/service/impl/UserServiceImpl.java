@@ -1,4 +1,4 @@
-package com.konomi.authenticationservice.service;
+package com.konomi.authenticationservice.service.impl;
 
 import com.konomi.authenticationservice.dto.ApiDto;
 import com.konomi.authenticationservice.dto.UserDto;
@@ -10,6 +10,7 @@ import com.konomi.authenticationservice.model.RoleModel;
 import com.konomi.authenticationservice.model.UserModel;
 import com.konomi.authenticationservice.repository.RoleRepository;
 import com.konomi.authenticationservice.repository.UserRepository;
+import com.konomi.authenticationservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -57,7 +58,7 @@ public class UserServiceImpl implements UserService {
         RoleType roleType = RoleType.valueOf(userDto.getRoleName());
 
         RoleModel role = roleRepository.findByRoleName(roleType)
-                .orElseThrow(() -> new ResourceNotFoundException("roel", "roleName", userDto.getRoleName()));
+                .orElseThrow(() -> new ResourceNotFoundException("role", "roleName", userDto.getRoleName()));
 
         UserModel user = new UserModel();
         user.setName(userDto.getName());
@@ -106,12 +107,12 @@ public class UserServiceImpl implements UserService {
 
         String document = StringUtils.stripToNull(userDto.getDocument());
         if (Objects.nonNull(document)) {
-            userModel.setName(document);
+            userModel.setDocument(document);
         }
 
         String email = StringUtils.stripToNull(userDto.getEmail());
         if (Objects.nonNull(email)) {
-            userModel.setName(email);
+            userModel.setEmail(email);
         }
 
         userModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
