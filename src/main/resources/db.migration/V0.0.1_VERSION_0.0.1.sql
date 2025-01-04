@@ -2,7 +2,7 @@ CREATE TABLE tab_user (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     name VARCHAR(150),
     email VARCHAR(150),
-    password VARCHAR(50),
+    password VARCHAR(200),
     active BOOLEAN,
     document VARCHAR(20),
     creation_date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,

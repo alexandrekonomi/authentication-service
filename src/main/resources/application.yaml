@@ -1,10 +1,15 @@
 spring:
   datasource:
-      url: jdbc:postgresql://localhost:5432/authService
-      username: postgres
-      password: root
-jpa:
-  hibernate:
-    ddl-auto: none
-    show-sql: true
-    dialect: org.hibernate.dialect.PostgreSQL82Dialect
+    url: jdbc:postgresql://localhost:5432/authService
+    username: postgres
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: none
+      show-sql: true
+      dialect: org.hibernate.dialect.PostgreSQL82Dialect
+
+jwt:
+  secret: DCUjMwYGxKkolA6dm93q2VkC46ZHE_8d1SC-FOrNEkyH4BJux_0CuhNCjnfZEFgn2zY-7ciXlowASnRxt4pJPw== #Mudar depois para algo mais segura
+  expiration: 10800000      # Expiração do token em milissegundos (3 horas = 3 * 60 * 60 *
+  refreshExpiration: 10800000

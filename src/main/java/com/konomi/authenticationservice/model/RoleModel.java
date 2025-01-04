@@ -2,9 +2,13 @@ package com.konomi.authenticationservice.model;
 
 import com.konomi.authenticationservice.enums.RoleType;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "tab_role")
+@Getter
+@Setter
 public class RoleModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

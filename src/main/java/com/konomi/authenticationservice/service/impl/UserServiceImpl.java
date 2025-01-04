@@ -18,6 +18,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -32,6 +33,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public ResponseEntity<?> signUpUser(UserDto userDto) {
@@ -64,7 +66,7 @@ public class UserServiceImpl implements UserService {
         user.setName(userDto.getName());
         user.setEmail(email);
         user.setDocument(document);
-        user.setPassword(password);
+        user.setPassword(passwordEncoder.encode(password));
         user.setActive(true);
         user.getRoles().add(role);
 
